@@ -85,3 +85,40 @@ INSERT INTO `users` VALUES ('Фамилия Имя Отчество', '+7 925 50
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+-- ----------------------------
+-- Table structure for messages
+-- ----------------------------
+DROP TABLE IF EXISTS `messages`;
+CREATE TABLE `messages` (
+  `message_id` varchar(255),
+  `message_text` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`message_id`),
+  UNIQUE KEY (`message_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- ----------------------------
+-- Records of messages
+-- ----------------------------
+
+
+BEGIN;
+	INSERT INTO `messages` VALUES ('help_message', 'Вас приветствует автоматизированная система заказа пропусков!\nДанная система предназначена для простого заказа пропусков с использованием мессенджера Telegram.\nДля начала работы, необходимо зарегистрироваться в системе. Для регистрации необходимо ввести Фамилию Имя Отчество, номер Вашего телефона и номер участка, на котором Вы проживаете.\n\nНапример:\nИванов Иван Иванович, 89161234567, 777\n\nПосле подтверждения Администратором Вашей регистрации, Вам поступит соответствующее сообщение, после которого Вы сможете заказывать пропуска для машин Ваших гостей для въезда на территорию посёлка.\n');
+	INSERT INTO `messages` VALUES ('start_hello_message', 'Вас приветствует БОТ заказа пропусков!\nДля начала, необходимо зарегистрироваться в системе.\nДля этого введите ФИО, номер телефона и номер участка (через запятую): ');
+	INSERT INTO `messages` VALUES ('start_hello_messageFor', 'Здравствуйте,  %s\nВас приветствует БОТ заказа пропусков!');
+	INSERT INTO `messages` VALUES ('start_confirmReg_message', 'Пожалуйста, дождитесь подтверждения регистрации!');
+	INSERT INTO `messages` VALUES ('start_ban_message', 'К сожалению, Вы временно не можете использовать систему заказа пропусков!');
+	INSERT INTO `messages` VALUES ('start_regIsConfirmed_message', 'Для заказа пропуска ввердите номер и марку машины!');
+	INSERT INTO `messages` VALUES ('error_checkPhone_message', 'Неправильно введён номер телефона.\nВведите ФИО, номер телефона и номер участка (через запятую):');
+	INSERT INTO `messages` VALUES ('error_checkSector_message', 'Неправильно введён номер участка.\nВведите ФИО, номер телефона и номер участка (через запятую):');
+	INSERT INTO `messages` VALUES ('error_checkName_message', 'Неправильно введены ФИО.\nВведите ФИО, номер телефона и номер участка (через запятую):');
+	INSERT INTO `messages` VALUES ('regIsCompleted_message', 'ФИО: %s\nТелефон: %s\nНомер участка: %s\n\nРегистрация завершена, ожидайте подтверждения учётной записи');
+	INSERT INTO `messages` VALUES ('error_reg_message', 'Ошибка регистрации, попробуйте повторить попытку позднее');
+	INSERT INTO `messages` VALUES ('error_repeatReg_message', 'Неправильный ввод\nВведите ФИО, номер телефона и номер участка (через запятую):');
+	INSERT INTO `messages` VALUES ('error_checkCarNum_message', 'Неправильно введён номер автомобиля');
+	INSERT INTO `messages` VALUES ('requestIsCompleted_message', 'Номер: %s\nМарка: %s\n\nЗаявка принята');
+	INSERT INTO `messages` VALUES ('error_repeatRequest', 'Неправильный ввод\nДля заказа пропуска ввердите номер и марку машины!');
+COMMIT;          
+    

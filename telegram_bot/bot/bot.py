@@ -1,4 +1,5 @@
 from aiogram import executor
+import aiogram
 from dispatcher import dp
 import personal_actions
 
