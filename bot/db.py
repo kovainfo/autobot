@@ -17,7 +17,7 @@ class BotDB:
 
     def user_exists(self, user_id):
         """Проверяем, есть ли юзер в базе"""
-        result = self.cursor.execute(f"SELECT id_telegramm FROM users WHERE id_telegramm = {user_id}")
+        result = self.cursor.execute(f"SELECT telegram_id FROM telegram_users WHERE telegram_id = {user_id}")
         data = self.cursor.fetchone()
         if (data is None):
             return False
@@ -28,7 +28,7 @@ class BotDB:
         try:
             connection = mysql.connector.connect(user='root', passwd="", port="3306", host="localhost", database=self.db_file)
             cursor = connection.cursor()
-            cursor.execute(f"SELECT * FROM users WHERE id_telegramm = {user_id}")
+            cursor.execute(f"SELECT * FROM telegram_users WHERE telegram_id = {user_id}")
             result = cursor.fetchone()
             connection.close()
             return result
@@ -38,7 +38,7 @@ class BotDB:
     def add_user(self, user_name, user_phone, user_addr, user_id):
         """Добавляем юзера в базу"""
         try:
-            sql = "INSERT INTO users (name, phone_number, lot_number, id_telegramm, approved) VALUES (%s, %s, %s, %s, 0)"
+            sql = "INSERT INTO telegram_users (name, phone_number, lot_number, telegram_id, approved) VALUES (%s, %s, %s, %s, 0)"
             val = (user_name, user_phone, user_addr, user_id)
             connection = mysql.connector.connect(user='root', passwd="", port="3306", host="localhost", database=self.db_file)
             cursor = connection.cursor()
