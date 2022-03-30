@@ -1,0 +1,172 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Open Sans';
+    font-weight: 400;
+    font-size: 15px;
+    background-image: url(../img/Fon.png);
+}
+
+html,
+body,
+.wrapper {
+	height: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+button {
+    background: #2B5378;
+	color: white;
+	width: 135px;
+	height: 30px;
+	margin-left: 15px;
+	transition: all 0.5s ease;
+	border-radius: 10px;
+	border: #2B5378;
+}
+
+.text1 {
+    position: absolute;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    text-align: left;
+    letter-spacing: 0.04em;
+    color: #FFFFFF;
+    margin-left: 60px;
+}
+
+.text2 {
+    position: absolute;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    text-align: left;
+    letter-spacing: 0.04em;
+    color: #FFFFFF;
+    margin-left: 800px;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    margin-top: 5px;
+}
+
+.d-flex { 
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+input {
+    width:250px;
+	height: 43px;
+	padding-left: 18px;
+	margin: 5px;
+	display: block;
+	margin-left: 60px;
+	margin-top: 40px;
+	box-sizing: border-box;
+	color: white;
+	background: rgba( 0,0,0,.1);
+	border: 1px solid white;
+	opacity: 1;
+    border-radius: 5px;
+}
+
+.maincontainer {
+    box-sizing: border-box;
+	min-height: 100%;
+	padding-bottom: 90px;
+}
+
+.container {
+    padding: 0 15px;
+}
+
+.container1{
+    position: absolute;
+	padding: 10 px;
+	top: 0;
+	margin-top: 11%;
+}
+
+.mainform {
+    position: absolute;
+    height: fit-content;
+}
+
+.back {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    left: 39px;
+    margin-top: 25px;
+
+    background: #2B5378;
+}
+
+.container2{
+    position: absolute;
+	padding: 10 px;
+	top: 0;
+	margin-top: 11%;
+    margin-left: 350px;
+}
+
+.container3 {
+    position: relative;
+    margin-top: 400px;
+    margin-left: 130px;
+}
+
+.container4 {
+    position: absolute;
+    margin-left: 180px;
+    margin-top: 10px;
+}
+
+#header {
+    background-color: #2B5378;
+    width: 100%;
+}
+
+.header-nav {
+    color: #FFFFFF;
+    font-family: 'Open Sans';
+    font-weight: 400;
+    font-size: 15px;
+}
+
+footer {
+    position: absolute;
+	color: white;
+	text-align: center;
+	background: #2B5378;
+    width: 100%;
+    height: 25px;
+    margin-top: 0px;
+}

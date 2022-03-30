@@ -3,6 +3,11 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TelegramUserController;
 use App\Models\TelegramUser;
+use App\Http\Controllers\CheckCarsController;
+use App\Http\Controllers\UserController;
+use App\Models\CheckCars;
+use App\Http\Controllers\RegCarsController;
+use App\Models\RegCars;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +28,10 @@ Route::get('/', function () {
 Route::apiResource('telegram_user', TelegramUserController::class)->middleware('role');
 
 Route::post('telegram_user/update', [TelegramUserController::class, 'update'])->middleware('role');
+Route::post('users/update', [UserController::class, 'update'])->middleware('role:admin');
+Route::post('users/delete', [UserController::class, 'destroy'])->middleware('role:admin');
+Route::post('users/create', [UserController::class, 'store'])->middleware('role:admin');
+Route::get('users/index', [UserController::class, 'index'])->middleware('role:admin');
 
 Route::post('login', [AuthController::class, 'login'])->name("login");
 
@@ -31,3 +40,17 @@ Route::get('welcome', function(){
 })->name("index")->middleware('role');
 
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('UserManage', function () {
+    return view('UserManage');
+})->name('userManage');
+
+
+Route::apiResource('reg_cars', RegCarsController::class)->middleware('role');
+
+Route::post('reg_cars/update', [RegCarsController::class, 'update'])->middleware('role');
+
+
+Route::get('/RegCars', function () {
+    return view('RegCars');
+})->name('RegCars')->middleware('role');

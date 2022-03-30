@@ -14,6 +14,17 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
         <button type="submit">Выйти</button>
     </form>
+    
+    <form action="{{ route('userManage') }}" method="GET">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+        <button type="submit">Управление пользователями</button>
+    </form>
+
+    <form action="{{ route('RegCars') }}" method="GET">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+        <button type="submit">Список машин</button>
+    </form>
+
     <table id="grid"></table>
     <script type="text/javascript">
     var grid;
