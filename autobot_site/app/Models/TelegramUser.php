@@ -111,4 +111,15 @@ class TelegramUser extends Model
     {
         return $this->attributes['id'];
     }
+
+    public function SendMessage(string $message)
+    {
+        $apiToken = env('BOT_TOKEN');
+        $data = [
+            'chat_id' => $this->getTelegramId(), 
+            'text' => $message
+        ];
+        $response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?".http_build_query($data));
+        return $response;
+    }
 }

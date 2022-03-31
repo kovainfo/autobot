@@ -61,3 +61,19 @@ class BotDB:
         except mysql.connector.Error as err:
             print("Something went wrong: {}".format(err))
             return None
+
+
+    def check_cars(self, add_info, num_car, user_id ):
+        """Добавляем юзера в базу"""
+        try:
+            sql = "INSERT INTO reg_cars (num_car, add_info, telegram_user_id, approved) VALUES (%s, %s, %s, 0)"
+            val = (num_car, user_id, add_info)
+            connection = mysql.connector.connect(user='root', passwd="", port="3306", host="localhost", database=self.db_file)
+            cursor = connection.cursor()
+            cursor.execute(sql, val)
+            connection.commit()
+            connection.close()
+            return True
+        except mysql.connector.Error as err:
+            print("Something went wrong: {}".format(err))
+            return False

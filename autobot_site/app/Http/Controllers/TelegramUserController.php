@@ -18,7 +18,10 @@ class TelegramUserController extends Controller
      */
     public function index(Request  $request)
     {
-        $paginate = TelegramUser::query()->paginate($request->input('limit'));
+
+        $paginateNumber = $request->input('limit') ?? 5;
+
+        $paginate = TelegramUser::query()->paginate($paginateNumber);
 
         return response()->json(['message' => 'success', 'records' => $paginate->items(), 'total' => $paginate->total()], 200);
     }
@@ -72,8 +75,19 @@ class TelegramUserController extends Controller
         $telegramUser->setApprovedIfNotEmpty($request->getApproved());
 
         $telegramUser->save();
-        
-        return response()->json(['message' => 'success', 'records' => $telegramUser], 200);
+
+        $message = "";
+        if($request->getApproved() == 1)
+        {
+            $message = sprintf("Здравствуйте, %s. Ваша регистрация восстановлена! Теперь вы можете оформлять пропуска для въезда автомобилей на территорию посёлка. Для заказа пропуска введите номер и марку машины", $telegramUser->getName());   
+        }
+        if($request->getApproved() == 2)
+        {
+            $message = sprintf("Здравствуйте, %s. Вы забанены!", $telegramUser->getName());   
+        }
+
+        $response = $telegramUser->SendMessage($message);
+        return response()->json(['message' => 'success', 'records' => $response ?? $telegramUser], 200);
     }
 
     /**
