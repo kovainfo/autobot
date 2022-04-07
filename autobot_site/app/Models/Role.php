@@ -11,12 +11,14 @@ class Role extends Model
 
     public const ROLE_ADMIN = 'admin';
     public const ROLE_GUARD = 'guard';
+    public const ROLE_LIVER = 'liver';
 
     public $timestamps = false;
 
     public static function getBaseArray(): array
     {
         $result = [];
+        $result[] = Role::ROLE_LIVER;
         $result[] = Role::ROLE_ADMIN;
         $result[] = ROle::ROLE_GUARD;
 
@@ -24,40 +26,42 @@ class Role extends Model
     }
 
     protected $fillable = [
-        'id',
-        'name'
+        'id_role',
+        'name_role'
     ];
 
     public static function make
     (
-        $name
+        $id_role,
+        $name_role
     )
     {
         return Role::query()->make([
-            'name' => $name
+            'id_role' => $id_role,
+            'name_role' => $name_role
         ]);
     }
 
-    public function getName()
+    public function getNameRole()
     {
-        return $this->attributes['name'];
+        return $this->attributes['name_role'];
     }
 
     public function getId()
     {
-        return $this->attributes['id'];
+        return $this->attributes['id_role'];
     }
 
-    public function setNameIfNotEmpty($name)
+    public function setNameRoleIfNotEmpty($name_role)
     {
-        if($name != '')
+        if($name_role != '')
         {
-            $this->attributes['name'] = $name;
+            $this->attributes['name_role'] = $name_role;
         }
     }
 
-    public static function getById($id): Role
+    public static function getById($id_role): Role
     {
-        return Role::query()->where('id', $id)->firstOrFail();
+        return Role::query()->where('id_role', $id_role)->firstOrFail();
     }
 }

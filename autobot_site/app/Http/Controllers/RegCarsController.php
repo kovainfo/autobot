@@ -6,6 +6,7 @@ use App\Http\Requests\MainRequests\RegCarsRequest;
 use App\Http\Requests\RegCarsRequestCreate;
 use App\Http\Requests\RegCarsRequestUpdate;
 use App\Models\RegCars;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RegCarsController extends Controller
@@ -22,7 +23,6 @@ class RegCarsController extends Controller
 
         return response()->json(['message' => 'success', 'records' => $paginate->items(), 'total' => $paginate->total()], 200);
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -33,15 +33,13 @@ class RegCarsController extends Controller
     {
         $RegCars = RegCars::make(
             $request->getNumCar(),
+            $request->getModel(),
+            $request->getOwner(),
             $request->getAddInfo(),
-            $request->getDateTime(),
-            $request->getAddress(),
-            $request->getFullName(),
-            $request->getPhoneNumber(),
+            $request->getDateTimeOrder(),
             $request->getComment(),
-            $request->getStatus(),
             $request->getApproved(),
-            $request->getTelegramUserId(),
+            
         );
         $RegCars->save();
         
@@ -68,21 +66,33 @@ class RegCarsController extends Controller
      */
     public function update(RegCarsRequestUpdate $request, RegCars $RegCars)
     {
-        $RegCars = RegCars::getRegCarsById($request->getId());
+        $RegCars = RegCars::getRegCarById($request->getIdRegCar());
 
         $RegCars->setNumCarIfNotEmpty($request->getNumCar());
+        $RegCars->setModelIfNotEmpty($request->getModel());
+        $RegCars->setOwnerIfNotEmpty($request->getOwner());
         $RegCars->setAddInfoIfNotEmpty($request->getAddInfo());
-        $RegCars->setDateTimeIfNotEmpty($request->getDateTime());
-        $RegCars->setAddressIfNotEmpty($request->getAddress());
-        $RegCars->setFullNameIfNotEmpty($request->getFullName());
-        $RegCars->setPhoneNumberIfNotEmpty($request->getPhoneNumber());
+        $RegCars->setDateTimeOrderIfNotEmpty($request->getDateTimeOrder());
         $RegCars->setCommentIfNotEmpty($request->getComment());
-        $RegCars->setStatusIfNotEmpty($request->getStatus());
         $RegCars->setApprovedIfNotEmpty($request->getApproved());
-        $RegCars->setTelegramUserIdIfNotEmpty($request->getTelegramUserId());
+        
 
         $RegCars->save();
+
+        $user = User::getById($RegCars->getIdUser());
         
+        $message = "";
+        if($request->getApproved() == 1)
+        {
+            $message = sprintf("Здравствуйте, %s. Ваша заявка на пропуск одобрена!", $user->getName());   
+        }
+        if($request->getApproved() == 2)
+        {
+            $message = sprintf("Здравствуйте, %s. Ваша заявка на пропуск отклонена!", $user->getName());   
+        }
+
+        $response = $user->SendMessage($message);
+
         return response()->json(['message' => 'success', 'records' => $RegCars], 200);
     }
 
