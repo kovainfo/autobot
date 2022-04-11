@@ -18,7 +18,7 @@ class RoleSeeder extends Seeder
         $roles = Role::getBaseArray();
         foreach($roles as $role)
         {
-            if(!Role::query()->where('name', $role)->exists())
+            if(!Role::query()->where('name_role', $role)->exists())
             {
                 Role::make($role)->save();
             }

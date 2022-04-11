@@ -6,82 +6,89 @@
 -- -----------------------------------------------------
 -- Table `autobot_laravel`.`messages`
 -- -----------------------------------------------------
+
 CREATE TABLE `messages` (
-  `message_id` varchar(255) NOT NULL,
-  `message_text` varchar(2000) NOT NULL,
+  `id_message` varchar(255) NOT NULL,
+  `message` varchar(2000) NOT NULL,
   PRIMARY KEY (`message_id`)
 );
-
--- -----------------------------------------------------
--- Table `autobot_laravel`.`telegram_users`
--- -----------------------------------------------------
-
-CREATE TABLE `telegram_users` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `phone_number` varchar(255) DEFAULT NULL,
-  `lot_number` varchar(255) DEFAULT NULL,
-  `telegram_id` varchar(255) DEFAULT NULL,
-  `approved` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `telegram_users_telegram_id_unique` (`telegram_id`)
-);
-
-
--- -----------------------------------------------------
--- Table `autobot_laravel`.`reg_cars`
--- -----------------------------------------------------
-
-CREATE TABLE `reg_cars` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `num_car` varchar(255) NOT NULL,
-  `add_info` varchar(255) NOT NULL,
-  `date_time` datetime NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `full_name` varchar(255) NOT NULL,
-  `phone_number` varchar(255) NOT NULL,
-  `comment` varchar(255) NOT NULL,
-  `status` varchar(255) NOT NULL,
-  `approved` int(11) NOT NULL,
-  `telegram_user_id` bigint(20) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `reg_cars_telegram_user_id_foreign` (`telegram_user_id`),
-  CONSTRAINT `reg_cars_telegram_user_id_foreign` FOREIGN KEY (`telegram_user_id`) REFERENCES `telegram_users` (`id`)
-);
-
 
 -- -----------------------------------------------------
 -- Table `autobot_laravel`.`roles`
 -- -----------------------------------------------------
 
 CREATE TABLE `roles` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_role` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name_role` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_role`)
 );
 
+-- -----------------------------------------------------
+-- Table `autobot_laravel`.`essences`
+-- -----------------------------------------------------
+
+CREATE TABLE `essences` (
+  `id_essences` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_essences`)
+);
+
+-- -----------------------------------------------------
+-- Table `autobot_laravel`.`address`
+-- -----------------------------------------------------
+
+CREATE TABLE `address` (
+  `id_address` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `address` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_address`)
+);
 
 -- -----------------------------------------------------
 -- Table `autobot_laravel`.`users`
 -- -----------------------------------------------------
 
-
 CREATE TABLE `users` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id_user` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `remember_token` varchar(100)  DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `role_id` bigint(20) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`),
-  KEY `users_role_id_foreign` (`role_id`),
-  CONSTRAINT `users_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
+  `surname` varchar(255) NOT NULL,
+  `patronymic` varchar(255) NOT NULL,
+  `phone_number` varchar(255) NOT NULL,
+  `telegram_id` varchar(255) NOT NULL,
+  `remember_token` varchar(100) NOT NULL,
+  `approved` int(11) NOT NULL,
+  `id_role` bigint(20) unsigned NOT NULL,
+  `id_essence` bigint(20) unsigned NOT NULL,
+  `id_address` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id_user`),
+  UNIQUE KEY `users_telegram_id_unique` (`telegram_id`),
+  UNIQUE KEY `users_id_essence_unique` (`id_essence`),
+  KEY `users_id_role_foreign` (`id_role`),
+  CONSTRAINT `users_id_role_foreign` FOREIGN KEY (`id_role`) REFERENCES `roles` (`id_role`),
+  KEY `users_id_essence_foreign` (`id_essence`),
+  CONSTRAINT `users_id_essence_foreign` FOREIGN KEY (`id_essence`) REFERENCES `essences` (`id_essence`),
+  KEY `users_id_address_foreign` (`id_address`),
+  CONSTRAINT `users_id_address_foreign` FOREIGN KEY (`id_address`) REFERENCES `address` (`id_address`),
 );
 
+-- -----------------------------------------------------
+-- Table `autobot_laravel`.`reg_cars`
+-- -----------------------------------------------------
+
+CREATE TABLE `reg_cars` (
+  `id_reg_car` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `num_car` varchar(255) NOT NULL,
+  `model` varchar(255) NOT NULL,
+  `owner` varchar(255) NOT NULL,
+  `add_info` varchar(255) NOT NULL,
+  `dateTime_order` datetime NOT NULL,
+  `comment` varchar(255) NOT NULL,
+  `approved` int(11) NOT NULL,
+  `id_user` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id_reg_car`),
+  KEY `reg_cars_id_user_foreign` (`id_user`),
+  CONSTRAINT `reg_cars_id_user_foreign` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`)
+);
 
 -- -----------------------------------------------------
 -- Table `autobot_laravel`.`roles` inserts
