@@ -16,11 +16,17 @@ class RoleSeeder extends Seeder
     public function run()
     {
         $roles = Role::getBaseArray();
-        foreach($roles as $role)
+        for($i = 0; $i < count($roles); $i++)
         {
-            if(!Role::query()->where('name', $role)->exists())
+            if(!Role::query()->where('id_role', $i)->exists())
             {
-                Role::make($role)->save();
+                Role::make($i, $roles[$i])->save();
+            }
+            else
+            {
+                Role::query()->where('id_role', $i)->update([
+                    'name_role' => $roles[$i]
+                ]);
             }
         }
     }
