@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests\MainRequests;
 
-use App\Models\Role;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class TelegramUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,18 +20,27 @@ class UserRequest extends FormRequest
     {
         return $this->input('name');
     }
-    public function getEmail()
+
+    public function getPhoneNumber()
     {
-        return $this->input('email');
+        return $this->input('phone_number');
     }
-    public function getRole(): Role
+
+    public function getLotNumber()
     {
-        return Role::getById($this->input('role_id'));
+        return $this->input('lot_number');
     }
-    public function getPasswordInput()
+
+    public function getTelegramId()
     {
-        return $this->input('password');
+        return $this->input('telegram_id');
     }
+
+    public function getApproved()
+    {
+        return $this->input('approved');
+    }
+
     public function getId()
     {
         return $this->input('id');
