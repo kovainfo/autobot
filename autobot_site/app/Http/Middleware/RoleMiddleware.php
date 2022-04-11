@@ -6,7 +6,6 @@ use App\Models\Role;
 use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class RoleMiddleware
 {
@@ -24,7 +23,7 @@ class RoleMiddleware
         {
             $roles = Role::getBaseArray();
         }
-        if(Auth::check() && auth()->user()->checkRole($roles))
+        if(auth()->check() && auth()->user()->checkRole($roles))
         {
             return $next($request);
         }
