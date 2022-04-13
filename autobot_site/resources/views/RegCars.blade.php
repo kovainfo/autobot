@@ -15,12 +15,6 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
         <button type="submit">Выйти</button>
     </form>
-
-    <form action="{{ route('index') }}" method="GET">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-        <button type="submit">Назад</button>
-    </form>
-
     <table id="grid"></table>
     <script type="text/javascript">
     var grid;
@@ -35,12 +29,15 @@
             if (confirm('Вы уверены?')) {
                 var record = {
                     num_car: e.data.record.num_car,
-                    model: e.data.record.model,
-                    add_info: e.data.record.add_info,
-                    dateTime_order: e.data.record.dateTime_order,
+                    telegram_user_id: e.data.record.telegram_user_id,
+                    address: e.data.record.address,
+                    date_time: e.data.record.date_time,
+                    full_name: e.data.record.full_name,
+                    phone_number: e.data.record.phone_number,
                     comment: e.data.record.comment,
-                    id_reg_car: e.data.record.id_reg_car,
-                    id_user: e.data.record.id_user,
+                    status: e.data.record.status,
+                    add_info: e.data.record.add_info,
+                    id: e.data.record.id,
                     approved: 1
 
                 };
@@ -63,12 +60,15 @@
             if (confirm('Вы уверены?')) {
                 var record = {
                     num_car: e.data.record.num_car,
-                    model: e.data.record.model,
-                    add_info: e.data.record.add_info,
-                    dateTime_order: e.data.record.dateTime_order,
+                    telegram_user_id: e.data.record.telegram_user_id,
+                    address: e.data.record.address,
+                    date_time: e.data.record.date_time,
+                    full_name: e.data.record.full_name,
+                    phone_number: e.data.record.phone_number,
                     comment: e.data.record.comment,
-                    id_reg_car: e.data.record.id_reg_car,
-                    id_user: e.data.record.id_user,
+                    status: e.data.record.status,
+                    add_info: e.data.record.add_info,
+                    id: e.data.record.id,
                     approved: 2
                 };
                 $.ajax({ url: '/reg_cars/update', data: record, method: 'POST' })  
@@ -86,16 +86,19 @@
                 dataSource: '/reg_cars/',
                 columns: [
 
-                    { field: 'model', title: 'Марка', sortable: true},
+                    { field: 'add_info', title: 'Марка', sortable: true},
+                    { field: 'telegram_user_id', title: 'ID телеграмм пользователя'},
                     { field: 'num_car', title: 'Номер машины'},
-                    { field: 'dateTime_order', title: 'Дата'},
-                    { field: 'add_info', title: 'Инфо'},
+                    { field: 'date_time', title: 'Дата'},
+                    { field: 'address', title: 'Адресс'},
+                    { field: 'full_name', title: 'Имя'},
+                    { field: 'phone_number', title: 'Номер телефона'},
                     { field: 'comment', title: 'Коментарий'},
-                    { field: 'id_reg_car', title: 'id машины', hidden: true},
-                    { field: 'id_user', title: 'id пользователя', hidden: true},
+                    { field: 'status', title: 'статус'},
+                    { field: 'id', title: 'id', hidden: true},
                     { field: 'approved', title: 'Действия'},
-                    { width: 124, tmpl: '<button>Одобрить</button>', align: 'center', events: { 'click': Dob } },
-                    { width: 124, tmpl: '<button>Отклонить</button>', align: 'center', events: { 'click': Del } }
+                    { width: 124, tmpl: '<button>Добавить</button>', align: 'center', events: { 'click': Dob } },
+                    { width: 124, tmpl: '<button>Бан</button>', align: 'center', events: { 'click': Del } }
                 ],
                 pager: { limit: 5 }
             });

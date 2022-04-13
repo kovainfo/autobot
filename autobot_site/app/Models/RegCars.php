@@ -12,42 +12,49 @@ class RegCars extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'id',
         'num_car',
-        'model',
-        'owner',
         'add_info',
-        'dateTime_order',
+        'date_time',
+        'address',
+        'full_name',
+        'phone_number',
         'comment',
+        'status',
         'approved',
-        'id_user'
+        'telegram_user_id'
     ];
 
     public static function make(
         $num_car,
-        $model,
-        $owner,
         $add_info,
-        $dateTime_order,
+        $date_time,
+        $address,
+        $full_name,
+        $phone_number,
         $comment,
+        $status,
         $approved,
-        $id_user
+        $telegram_user_id
     )
     {
         return RegCars::query()->make([
             'num_car' => $num_car,
-            'model' => $model,
-            'owner' => $owner,
             'add_info' => $add_info,
-            'dateTime_order' => $dateTime_order,
+            'date_time' => $date_time,
+            'address' => $address,
+            'full_name' => $full_name,
+            'phone_number' => $phone_number,
             'comment' => $comment,
+            'status' => $status,
             'approved' => $approved,
-            'id_user' => $id_user->getId()
+            'telegram_user_id' => $telegram_user_id
         ]);
     }
-    
-    public static function getRegCarById($id_reg_car): RegCars
+
+    public static function getRegCarsById($id): RegCars
     {
-        return RegCars::query()->where('id_reg_car', $id_reg_car)->firstOrNew();
+        return RegCars::query()->where('id', $id)->firstOrNew();
     }
 
     public function setNumCarIfNotEmpty($num_car)
@@ -55,14 +62,6 @@ class RegCars extends Model
         if($num_car != '')
         {
             $this->attributes['num_car'] = $num_car;
-        }
-    }
-
-    public function setModelIfNotEmpty($model)
-    {
-        if($model != '')
-        {
-            $this->attributes['model'] = $model;
         }
     }
 
@@ -74,25 +73,35 @@ class RegCars extends Model
         }
     }
 
-   public function getIdUser()
-   {
-       return $this->attributes['id_user'];
-   }
-
-    public function setOwnerIfNotEmpty($owner)
+    public function setDateTimeIfNotEmpty($date_time)
     {
-        if($owner != '')
+        if($date_time != '')
         {
-            $this->attributes['owner'] = $owner;
+            $this->attributes['date_time'] = $date_time;
         }
     }
 
-
-    public function setDateTimeOrderIfNotEmpty($dateTime_order)
+    public function setAddressIfNotEmpty($address)
     {
-        if($dateTime_order != '')
+        if($address != '')
         {
-            $this->attributes['dateTime_order'] = $dateTime_order;
+            $this->attributes['address'] = $address;
+        }
+    }
+
+    public function setFullNameIfNotEmpty($full_name)
+    {
+        if($full_name != '')
+        {
+            $this->attributes['full_name'] = $full_name;
+        }
+    }
+
+    public function setPhoneNumberIfNotEmpty($phone_number)
+    {
+        if($phone_number != '')
+        {
+            $this->attributes['phone_number'] = $phone_number;
         }
     }
 
@@ -104,6 +113,13 @@ class RegCars extends Model
         }
     }
 
+    public function setStatusIfNotEmpty($status)
+    {
+        if($status != '')
+        {
+            $this->attributes['status'] = $status;
+        }
+    }
 
     public function setApprovedIfNotEmpty($approved)
     {
@@ -113,36 +129,24 @@ class RegCars extends Model
         }
     }
 
-    
-    public function setIdUser(id_user $id_user)
+    public function setTelegramUserIdIfNotEmpty($telegram_user_id)
     {
-        if($id_user == null ||!$id_user->exists || $id_user == '') return;
-        $this->attributes['id_user'] = $id_user->getId();
+        if($telegram_user_id != '')
+        {
+            $this->attributes['telegram_user_id'] = $telegram_user_id;
+        }
     }
 
-    
 
 
-   
+    public function getId()
+    {
+        return $this->attributes['id'];
+    }
 
     public function getNumCar()
     {
         return $this->attributes['num_car'];
-    }
-
-    public function getModel()
-    {
-        return $this->attributes['model'];
-    }
-
-    public function getDateTimeOrder()
-    {
-        return $this->attributes['dateTime_order'];
-    }
-
-    public function getComment()
-    {
-        return $this->attributes['comment'];
     }
 
     public function getAddInfo()
@@ -150,15 +154,43 @@ class RegCars extends Model
         return $this->attributes['add_info'];
     }
 
-    
-    protected $primaryKey = 'id_reg_car';
+    public function getDateTime()
+    {
+        return $this->attributes['date_time'];
+    }
 
+    public function getAddress()
+    {
+        return $this->attributes['address'];
+    }
+
+    public function getFullName()
+    {
+        return $this->attributes['full_name'];
+    }
+
+    public function getPhoneNumber()
+    {
+        return $this->attributes['phone_number'];
+    }
+
+    public function getComment()
+    {
+        return $this->attributes['comment'];
+    }
+
+    public function getStatus()
+    {
+        return $this->attributes['status'];
+    }
 
     public function getApproved()
     {
         return $this->attributes['approved'];
     }
 
-    
-    
+    public function getTelegramUserId()
+    {
+        return $this->attributes['telegram_user_id'];
+    }
 }
