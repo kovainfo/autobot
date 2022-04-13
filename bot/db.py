@@ -69,8 +69,8 @@ class BotDB:
     def add_user(self, name, surname, patronymic, user_phone, user_addr, user_id):
         """Добавляем юзера в базу"""
         try:
-            sql = "INSERT INTO users (name, surname, patronymic, phone_number, id_address, telegram_id, approved, id_role, id_essence) VALUES (%s, %s, %s, %s, %s, %s, 0, 0, 0)"
-            val = (name, surname, patronymic, user_phone, user_addr, user_id)
+            sql = "INSERT INTO users (name, surname, patronymic, phone_number, id_address, telegram_id, approved, id_role, id_essence) VALUES (%s, %s, %s, %s, %s, %s, 0, 1, 1)"
+            val = ( surname, name, patronymic, user_phone, user_addr, user_id)
             connection = mysql.connector.connect(user='root', passwd="", port="3306", host="localhost", database=self.db_file)
             cursor = connection.cursor()
             cursor.execute(sql, val)
@@ -93,12 +93,11 @@ class BotDB:
             print("Something went wrong: {}".format(err))
             return None
 
-
-    def check_cars(self, add_info, num_car, user_id ):
+    def check_cars(self, model, num_car, tuser_id, formatted_date):
         """Добавляем юзера в базу"""
         try:
-            sql = "INSERT INTO reg_cars (num_car, add_info, telegram_user_id, approved) VALUES (%s, %s, %s, 0)"
-            val = (num_car, user_id, add_info)
+            sql = "INSERT INTO reg_cars (num_car, model, id_user, dateTime_order, approved) VALUES (%s, %s, %s, %s, 0)"
+            val = (model, num_car, tuser_id, formatted_date)
             connection = mysql.connector.connect(user='root', passwd="", port="3306", host="localhost", database=self.db_file)
             cursor = connection.cursor()
             cursor.execute(sql, val)
@@ -108,3 +107,19 @@ class BotDB:
         except mysql.connector.Error as err:
             print("Something went wrong: {}".format(err))
             return False
+
+
+    def selectId_User(self, tuser_id):
+        """Получаем ID адреса"""
+        try:
+            sql = f"SELECT * FROM users WHERE telegram_id = '{tuser_id}'"
+            connection = mysql.connector.connect(user='root', passwd="", port="3306", host="localhost", database=self.db_file)
+            cursor = connection.cursor()
+            cursor.execute(sql)
+            id_Ad = cursor.fetchone()
+            connection.commit()
+            connection.close()
+            return id_Ad[0] if id_Ad != None else -1
+        except mysql.connector.Error as err:
+            print("Something went wrong: {}".format(err))
+            return -2

@@ -15,7 +15,7 @@ class UserUpdateRequest extends UserRequest
     public function rules()
     {
         return [
-            //
+            
         ];
     }
 }

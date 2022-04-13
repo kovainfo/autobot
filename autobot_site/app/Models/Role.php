@@ -11,12 +11,14 @@ class Role extends Model
 
     public const ROLE_ADMIN = 'admin';
     public const ROLE_GUARD = 'guard';
+    public const ROLE_LIVER = 'liver';
 
     public $timestamps = false;
 
     public static function getBaseArray(): array
     {
         $result = [];
+        $result[] = Role::ROLE_LIVER;
         $result[] = Role::ROLE_ADMIN;
         $result[] = ROle::ROLE_GUARD;
 
@@ -24,9 +26,10 @@ class Role extends Model
     }
 
     protected $fillable = [
-        'id_role',
         'name_role'
     ];
+
+    protected $primaryKey = 'id_role';
 
     public static function make
     (
@@ -45,7 +48,7 @@ class Role extends Model
 
     public function getId()
     {
-        return $this->attributes['id_role'];
+        return $this->id_role;
     }
 
     public function setNameRoleIfNotEmpty($name_role)

@@ -36,14 +36,16 @@
             });
             if (confirm('Are you sure?')) {
                 var record = {
-                    id: e.data.record.id,
+                    id_user: e.data.record.id_user,
                     name: e.data.record.name,
+                    surname: e.data.record.surname,
+                    patronymic: e.data.record.patronymic,
                     phone_number: e.data.record.phone_number,
-                    lot_number: e.data.record.lot_number,
+                    address: e.data.record.address,
                     telegram_id: e.data.record.telegram_id,
                     approved: 1
                 };
-                $.ajax({ url: '/telegram_user/update', data: record, method: 'POST' })  
+                $.ajax({ url: '/users/update', data: record, method: 'POST' })  
                 .done(function () {
                     alert('Nice.');
                     grid.reload();
@@ -61,14 +63,16 @@
             });
             if (confirm('Are you sure?')) {
                 var record = {
-                    id: e.data.record.id,
+                    id_user: e.data.record.id_user,
                     name: e.data.record.name,
+                    surname: e.data.record.surname,
+                    patronymic: e.data.record.patronymic,
                     phone_number: e.data.record.phone_number,
-                    lot_number: e.data.record.lot_number,
+                    address: e.data.record.address,
                     telegram_id: e.data.record.telegram_id,
                     approved: 2
                 };
-                $.ajax({ url: '/telegram_user/update', data: record, method: 'POST' })  
+                $.ajax({ url: '/users/update', data: record, method: 'POST' })  
                 .done(function () {
                     alert('Nice.');
                     grid.reload();
@@ -80,14 +84,16 @@
         }
         $(document).ready(function () {
             grid = $('#grid').grid({
-                dataSource: '/telegram_user/',
+                dataSource: '/users/index',
                 columns: [
-                    { field: 'id', title: 'id', hidden: true},
-                    { field: 'name', title: 'ФИО', sortable: true},
+                    { field: 'id_user', title: 'id', hidden: true},
+                    { field: 'name', title: 'Имя', sortable: true, colspan: 3}, 
+                    { field: 'surname', title: 'Фамилия', sortable: true},
+                    { field: 'patronymic', title: 'Отчетство', sortable: true},
                     { field: 'phone_number', title: 'Номер телеофна'},
-                    { field: 'lot_number', title: 'Номер участка'},
+                    { field: 'address', title: 'Номер участка'},
                     { field: 'telegram_id', title: 'ID Телеграма'},
-                    { field: 'approved', title: 'Действия'},
+                    { field: 'approved', title: 'Статус'},
                     { width: 124, tmpl: '<button>Добавить</button>', align: 'center', events: { 'click': UpAdd } },
                     { width: 124, tmpl: '<button>Бан</button>', align: 'center', events: { 'click': Update } }
                 ],
