@@ -34,26 +34,20 @@ class UserController extends Controller
     {
         $user = User::make(
             $request->getName(),
-            $request->getEmail(),
-            $request->getPasswordInput(),
-            $request->getRole()
+            $request->getSurname(),
+            $request->getPatronymic(),
+            $request->getPhoneNumber(),
+            $request->getTelegramId(),
+            $request->getApproved(),
+            $request->getRole(),
+            $request->getEssence(),
+            $request->getAddress()
         );
 
         $user->save();
 
         return response()->json(['messsage' => 'success', 'records' => $user], 200);
 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        return response()->json(['message' => 'success', 'records' => $user], 200);
     }
 
     /**
@@ -65,12 +59,17 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, User $user)
     {
-        $user = User::getById($request->getId());
+        $user = User::getById($request->getIdUser());
 
         $user->setNameIfNotEmpty($request->getName());
-        $user->setEmailIfNotEmpty($request->getEmail());
-        $user->setPasswordfNotEmpty($request->getPasswordInput());
+        $user->setSurnameIfNotEmpty($request->getSurname());
+        $user->setPatronymicIfNotEmpty($request->getPatronymic());
+        $user->setPhoneNumberIfNotEmpty($request->getPhoneNumber());
+        $user->setTelegramIdIfNotEmpty($request->getTelegramId());
+        $user->setApprovedIfNotEmpty($request->getApproved());
         $user->setRole($request->getRole());
+        $user->setEssence($request->getEssence());
+        $user->setAddress($request->getAddress());
 
         $user->save();
 
@@ -85,7 +84,7 @@ class UserController extends Controller
      */
     public function destroy(Request $request, User $user)
     {
-        $user = User::getById($request->input('id'));
+        $user = User::getById($request->input('id_user'));
         $result = $user->delete();
         return response()->json(['message' => $result ? 'success' : 'error'], $result ? 200 : 500);
     }
