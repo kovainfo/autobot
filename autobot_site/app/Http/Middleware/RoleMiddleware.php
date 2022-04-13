@@ -6,7 +6,6 @@ use App\Models\Role;
 use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class RoleMiddleware
 {
@@ -24,14 +23,14 @@ class RoleMiddleware
         {
             $roles = Role::getBaseArray();
         }
-        if(Auth::check() && auth()->user()->checkRole($roles))
+        if(auth()->check() && auth()->user()->checkRole($roles))
         {
             return $next($request);
         }
-        else
+        elseif(auth()->check())
         {
-            return redirect(route('auth'));
+            abort(403);
         }
-        abort(403);
+        return redirect(route('auth'));
     }
 }
