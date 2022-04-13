@@ -21,53 +21,40 @@ class RegCarsRequest extends FormRequest
         return $this->input('num_car');
     }
 
+    public function getModel()
+    {
+        return $this->input('model');
+    }
+
     public function getAddInfo()
     {
         return $this->input('add_info');
     }
 
-    public function getDateTime()
+    public function getOwner()
     {
-        return $this->input('date_time');
+        return $this->input('owner');
     }
 
-    public function getFullName()
+    public function getDateTimeOrder()
     {
-        return $this->input('full_name');
+        return $this->input('dateTime_order');
     }
 
-    public function getPhoneNumber()
-    {
-        return $this->input('phone_number');
-    }
 
     public function getComment()
     {
         return $this->input('comment');
     }
 
-    public function getStatus()
-    {
-        return $this->input('status');
-    }
-
-    public function getTelegramUserId()
-    {
-        return $this->input('telegram_user_id');
-    }
-
-    public function getAddress()
-    {
-        return $this->input('address');
-    }
 
     public function getApproved()
     {
         return $this->input('approved');
     }
 
-    public function getId()
+    public function getIdRegCar()
     {
-        return $this->input('id');
+        return $this->input('id_reg_car');
     }
 }

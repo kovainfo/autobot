@@ -10,7 +10,7 @@
 CREATE TABLE `messages` (
   `id_message` varchar(255) NOT NULL,
   `message` varchar(2000) NOT NULL,
-  PRIMARY KEY (`message_id`)
+  PRIMARY KEY (`id_message`)
 );
 
 -- -----------------------------------------------------
@@ -62,13 +62,12 @@ CREATE TABLE `users` (
   `id_address` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`id_user`),
   UNIQUE KEY `users_telegram_id_unique` (`telegram_id`),
-  UNIQUE KEY `users_id_essence_unique` (`id_essence`),
   KEY `users_id_role_foreign` (`id_role`),
   CONSTRAINT `users_id_role_foreign` FOREIGN KEY (`id_role`) REFERENCES `roles` (`id_role`),
   KEY `users_id_essence_foreign` (`id_essence`),
   CONSTRAINT `users_id_essence_foreign` FOREIGN KEY (`id_essence`) REFERENCES `essences` (`id_essence`),
   KEY `users_id_address_foreign` (`id_address`),
-  CONSTRAINT `users_id_address_foreign` FOREIGN KEY (`id_address`) REFERENCES `address` (`id_address`),
+  CONSTRAINT `users_id_address_foreign` FOREIGN KEY (`id_address`) REFERENCES `address` (`id_address`)
 );
 
 -- -----------------------------------------------------
@@ -79,7 +78,7 @@ CREATE TABLE `reg_cars` (
   `id_reg_car` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `num_car` varchar(255) NOT NULL,
   `model` varchar(255) NOT NULL,
-  `owner` varchar(255) NOT NULL,
+  `owner` tinyint(1) NOT NULL,
   `add_info` varchar(255) NOT NULL,
   `dateTime_order` datetime NOT NULL,
   `comment` varchar(255) NOT NULL,

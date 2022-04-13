@@ -28,10 +28,10 @@ class RoleMiddleware
         {
             return $next($request);
         }
-        elseif(auth()->check())
+        else
         {
-            abort(403);
+            return redirect(route('auth'));
         }
-        return redirect(route('auth'));
+        abort(403);
     }
 }

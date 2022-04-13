@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\MainRequests\UserRequest;
+use App\Models\Essence;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserCreateRequest extends UserRequest
@@ -15,7 +16,7 @@ class UserCreateRequest extends UserRequest
     public function rules()
     {
         return [
-            //
+            'email' => 'required|email',
         ];
     }
 }

@@ -26,17 +26,19 @@ a {
 }
 
 button {
-    background: #2B5378;
+    background: #152b41;
 	color: white;
-	width: 190px;
+	width: 80px;
 	height: 30px;
-	margin-left: 15px;
 	transition: all 0.5s ease;
 	border-radius: 5px;
-	border: #2B5378;
+	border: #ffffff;
 }
 
-
+.formtable{
+    width: 0 auto;
+    height: 0 auto;
+}
 
 .text1 {
     position: absolute;
@@ -62,6 +64,35 @@ button {
     margin-left: 27px;
 }
 
+.text3 {
+    margin:0 auto;
+    width: 500px;
+    left: 27px;
+    font-family: 'Open Sans';
+    font-style: bold;
+    font-weight: 700;
+    font-size: 20px;
+    color: #FFFFFF;
+    margin:0 auto;
+       empty-cells:show; 
+       margin:0 auto;
+       margin-left: 38%;
+    position: absolute;
+}
+
+.text4 {
+    margin-top: 100px;
+
+    width: 500px;
+    left: 27px;
+    font-family: 'Open Sans';
+    font-style: bold;
+    font-weight: 700;
+    font-size: 20px;
+    color: #FFFFFF;
+    margin-left: 41%;
+    position: absolute;
+}
 
 ul {
     list-style: none;
@@ -163,7 +194,48 @@ footer {
     height: 25px;
     margin-top: 0px;
 }
+.grid1{
+    margin-top: 40px;
+}
 
-.optimus{
-    position: absolute;
+.grid3{
+    margin-top: 150px;
+}
+
+table{
+	width:1000px;
+	height:200px;
+	border-style:solid;
+	border-bottom-width:thin;
+    
+	margin:0 auto;
+       table-layout:fixed;
+       empty-cells:show; 
+       
+       margin:0 auto;
+       font-size:14px;
+       
+       color:#ffffff;
+       background-color: #1d3852;
+       border-radius: 2%;
+}
+
+.fi_tr{
+	background:url(img/table_header.png);
+	text-align:center;
+	height:30px;
+}
+td{
+	overflow:hidden;
+	 height:25px;
+	 border:1px solid #cad9ea;
+   	 padding:0 1em 0;
+}
+
+tr:hover{
+	background-color:#49717a7a;
+}
+
+.odd{
+ background-color:#f5fafe;
 }
