@@ -37,9 +37,13 @@ async def echo_message(message: types.Message):
             if(phone is None):
                 await message.bot.send_message(message.chat.id, BotDB.get_message("error_checkPhone_message"))
             else:
-                name=str(user_data[0]).strip().split(' ')[0].strip() 
-                surname=str(user_data[0]).strip().split(' ')[1].strip() 
-                patronymic=str(user_data[0]).strip().split(' ')[2].strip() 
+                userFIO = str(user_data[0]).strip().split(' ')
+
+                userFIO = list(filter(None, userFIO))
+
+                name=userFIO[0].strip()
+                surname=userFIO[1].strip()
+                patronymic=userFIO[2].strip()
 
                 user_fio = f"{name} {surname} {patronymic}"
 
@@ -93,7 +97,7 @@ async def echo_message(message: types.Message):
 
 
 def check_phone( text ):
-    if(not re.match(r'^((8|\+7)[\- ]?)(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$', text)):
+    if(not re.match(r'^((8|\+7)[\- ]?)(\(?\d{3}\)?[\- ]?)?[\d\- ]{7}$', text)):
         return None
     else:
         list1 = re.findall(r'\d', text)

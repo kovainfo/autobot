@@ -29,6 +29,7 @@
                     <button id="btnSearch" type="button" class="btn btn-default">Search</button>
                     <button id="btnClear" type="button" class="btn btn-default">Clear</button>
                     <button type="button" id="btnCreateTestUsers" class="btn btn-default">Add +5 users</button>
+                    <input value = "New * users" type="button" id="btnUpdateUsers" class="btn btn-default"/>
                 </form>
             </div>
             <div class="col-xs-4">
@@ -157,7 +158,6 @@
 
             $('#email').val(e.data.record.email);
             $('#password').val(e.data.record.password);
-            $('#user_id').val(e.data.record.user_id);
             dialog.open('Edit user');
         }
         function Create() {
@@ -218,6 +218,34 @@
                     });
             }
         }
+
+        let timerId = setInterval(() => {
+
+            var xhr = new XMLHttpRequest()
+            xhr.open('GET', 'users/getCount', true)
+            xhr.send()
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState != 4) {
+                    return
+            }
+
+            var UsersCount = JSON.parse(xhr.responseText)   
+            var newUsersCount = UsersCount.count - grid.count(true)
+            $('#btnUpdateUsers').val("New " + newUsersCount + " users")
+
+            if (xhr.status === 200) {
+                    console.log('result', xhr.responseText)
+                } else {
+                    console.log('err', xhr.responseText)
+                }
+            }            
+        }, 2000);
+
+        $('#btnUpdateUsers').on('click', function () {
+            grid.reload();
+        });
+        
         $(document).ready(function () {
             grid = $('#grid').grid({
                 primaryKey: 'id',
