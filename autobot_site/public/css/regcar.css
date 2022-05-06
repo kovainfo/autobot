@@ -57,8 +57,7 @@ a {
     background: #FFFFFF;
 }
 
-
-#grid button{
+#grid2 button{
     background: #2B5378; 
     color: white; 
     width: 40px; 
@@ -69,7 +68,7 @@ a {
     border: #2B5378;
 }
 
-#grid{
+#grid2{
     width: 1200px; 
     
     height:200px; 

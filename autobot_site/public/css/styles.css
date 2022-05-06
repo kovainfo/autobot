@@ -1,70 +1,107 @@
-form {
-    border: 3px solid #f1f1f1;
+body {
+    font-family: 'Open Sans';
+    font-weight: 400;
+    font-size: 15px;
+    background-image: url(../img/Fon.png);
+    background-color: #2B5378;
 }
 
-/* Full-width inputs */
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+input{
+    width:250px;
+	height: 43px;
+	padding-left: 18px;
+	margin-top: 30px;
+    margin-left: 900px;
+	display: block;
+	box-sizing: border-box;
+	color: white;
+	background: rgba( 0,0,0,.1);
+	border: 1px solid white;
+	opacity: 1;
+    border-radius: 5px;
 }
 
-/* Set a style for all buttons */
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
+
+#in1{
+    position: absolute;
+    width:250px;
+	height: 43px;
+	padding-left: 18px;
+	margin-top: 250px;
+    margin-left: 900px;
+	display: block;
+	box-sizing: border-box;
+	color: white;
+	background: rgba( 0,0,0,.1);
+	border: 1px solid white;
+	opacity: 100%;
+    border-radius: 5px;
 }
 
-/* Add a hover effect for buttons */
-button:hover {
-    opacity: 0.8;
+#in2{
+    position: absolute;
+    width:250px;
+	height: 43px;
+	padding-left: 18px;
+	margin-top: 325px;
+    margin-left: 900px;
+	display: block;
+	box-sizing: border-box;
+	color: white;
+	background: rgba( 0,0,0,.1);
+	border: 1px solid white;
+	opacity: 100%;
+    border-radius: 5px;
 }
 
-/* Extra style for the cancel button (red) */
-.cancelbtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #f44336;
+#logIn{
+    position: absolute;
+    width: 120px;
+    height: 40px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    color: #FFFFFF;
+    background: #2B5378;
+    border-radius: 10px;
+    border-width: 0px;
+    margin-top: 425px;
+    margin-left: 965px;
 }
 
-/* Center the avatar image inside this container */
-.imgcontainer {
+#lb1{
+    position: absolute;
+    color: #FFFFFF;
+    margin-top: 150px;
+    margin-left: 925px;
+    font-size: 36px;
+}
+
+#lb2{
+    position: absolute;
+    color: #FFFFFF;
+    margin-top: 500px;
+    margin-left: 125px;
+    font-size: 36px;
+    text-align: center;
+}
+
+img.avatar {
+    width: 400px;
+    border-radius: 50%;
     text-align: center;
     margin: 24px 0 12px 0;
 }
 
-/* Avatar image */
-img.avatar {
-    width: 40%;
-    border-radius: 50%;
-}
-
-/* Add padding to containers */
 .container {
     padding: 16px;
 }
 
-/* The "Forgot password" text */
-span.psw {
-    float: right;
-    padding-top: 16px;
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-    span.psw {
-        display: block;
-        float: none;
-    }
-    .cancelbtn {
-        width: 100%;
-    }
+.container2{
+    position: absolute;
+	padding: 10px;
+	top: 0;
+	margin-top: 6%;
+    margin-left: 200px;
 }
