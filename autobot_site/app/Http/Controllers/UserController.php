@@ -22,13 +22,29 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $paginateNumber = $request->input('limit') ?? 5;
+        $controller = new UserController();
+        $paginateNumber = $request->input('limit') ?? json_decode($controller->getUsersCount()->content())->count;
         
         $paginate = DB::table('users')
         ->join('addresses', 'addresses.id_address', '=', 'users.id_address')
         ->join('roles', 'roles.id_role', '=', 'users.id_role')
-        ->join('essences', 'essences.id_essence', '=', 'users.id_essence')->orderBy('users.id_user', 'desc')->paginate($paginateNumber);
+        ->join('essences', 'essences.id_essence', '=', 'users.id_essence')->orderBy($request->input('sortBy') ?? 'users.id_user', $request->input('direction') ?? 'desc');
+
+        if(!empty($request->input("name"))) {
+            $paginate = $paginate->where("name", "like", '%' . $request->input("name") . '%');
+        }
+        if(!empty($request->input("email"))) {
+            $paginate = $paginate->where("email", "like", '%' . $request->input("email") . '%');
+        }
+        if(!empty($request->input("approved"))) {
+            $paginate = $paginate->where("approved", "like", '%' . $request->input("approved") . '%');
+        }
+        if(!empty($request->input("name_role"))) {
+            $paginate = $paginate->where("name_role", "like", '%' . $request->input("name_role") . '%');
+        }
         
+        $paginate = $paginate->paginate($paginateNumber);
+
         return response()->json(['message' => 'success', 'records' => $paginate->items(), 'total' => $paginate->total()], 200);
     }
 
@@ -49,7 +65,7 @@ class UserController extends Controller
             );
             $essence->save();
         }
-        elseif(User::query()->where('id_essence', Essence::getEssenceByEmail($request->getEmail()))->first() == null)
+        elseif(User::query()->where('id_essence', Essence::getEssenceByEmail($request->getEmail())->getId())->first() == null)
         {
             $essence = Essence::getEssenceByEmail($request->getEmail());
         }
@@ -95,7 +111,7 @@ class UserController extends Controller
 
         //if(Essence::getEssenceByEmail($request->getEmail()) != null && Essence::getEssenceByEmail($request->getEmail())->getId() != $essence->getId())
 
-        if(User::query()->where('id_essence', $essence->getId())->count() > 1 && $essence->getEmail() != $request->getEmail())
+        if($request->getEmail() != '' && User::query()->where('id_essence', $essence->getId())->count() > 1 && $essence->getEmail() != $request->getEmail())
         {
             $essence = Essence::make(
                 $request->getEmail(),
@@ -165,7 +181,6 @@ class UserController extends Controller
         User::factory()->count(5)->create();
         return response()->json(['message' => 'success'], 200);
     }
-
 
     public function getUsersCount()
     {

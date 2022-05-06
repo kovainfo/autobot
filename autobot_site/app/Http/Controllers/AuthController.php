@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Essence;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,16 @@ class AuthController extends Controller
         }
         if($user != null){
             Auth::login($user, true);
-            return redirect(route('index'));
+            $currentRole = $user->getRole()->getNameRole();
+            if($currentRole == Role::ROLE_ADMIN)
+            {
+                return redirect(route('index'));
+            }
+            elseif($currentRole == Role::ROLE_GUARD)
+            {
+                //add security route
+                return redirect(route('security'));
+            }
         }
         else
         {

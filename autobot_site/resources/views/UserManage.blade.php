@@ -2,15 +2,16 @@
 <html>
 <head>
 <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>jQuery Grid Bootstrap</title>
+    <title>Редактирование пользователя</title>
     <meta charset="utf-8" />
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <a href="welcome">Назад</a>
+    <a href="http://127.0.0.1:8000/admin">Назад</a>
     <div class="container-full">
         <div class="row">
             <div class="col-xs-8">
@@ -90,6 +91,7 @@
             
         </form>
     </div>
+
     <div id="dialog" style="display: none">
         <input type="hidden" id="id_user" />
         <form>
@@ -309,7 +311,7 @@
                 grid.reload();
             });
             $('#btnSearch').on('click', function () {
-                grid.reload({ name: $('#txtName').val(), surname: $('#txtSurname').val(), patronymic: $('#txtPatronymic').val(), phone_number: $('#txtPhone_number').val(), telegram_id: $('#txtTelegram_id').val(), approved: $('#txtApproved').val(), email: $('#txtEmail').val(), role_id: $('#txtRole_id').val() });
+                grid.reload({ page: 1, name: $('#txtName').val(), surname: $('#txtSurname').val(), patronymic: $('#txtPatronymic').val(), phone_number: $('#txtPhone_number').val(), telegram_id: $('#txtTelegram_id').val(), approved: $('#txtApproved').val(), email: $('#txtEmail').val(), role_id: $('#txtRole_id').val() });
             });
             $('#btnClear').on('click', function () {
                 $('#id_user').val('');
