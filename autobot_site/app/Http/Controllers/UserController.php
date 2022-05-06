@@ -93,11 +93,9 @@ class UserController extends Controller
         $address = $user->getAddress();
         $essence = $user->getEssence();
 
-        if(Essence::getEssenceByEmail($request->getEmail()) != null && Essence::getEssenceByEmail($request->getEmail())->getId() != $essence->getId())
-        {
-            return response()->json(['messsage' => 'The email has already been taken."'], 500);
-        }
-        if(User::query()->where('id_essence', $essence->getId())->count() > 1)
+        //if(Essence::getEssenceByEmail($request->getEmail()) != null && Essence::getEssenceByEmail($request->getEmail())->getId() != $essence->getId())
+
+        if(User::query()->where('id_essence', $essence->getId())->count() > 1 && $essence->getEmail() != $request->getEmail())
         {
             $essence = Essence::make(
                 $request->getEmail(),
@@ -106,7 +104,11 @@ class UserController extends Controller
             $essence->save();
         }
 
-        $essence->setEmailIfNotEmpty($request->getEmail());
+        if($essence->getEmail() != $request->getEmail())
+        {
+            $essence->setEmailIfNotEmpty($request->getEmail());
+        }
+        
         $essence->setPasswordIfNotEmpty($request->getPasswordAttribute());
 
         if(Address::getAddressByAddressAttribute($request->getAddressAttribute()) != null)

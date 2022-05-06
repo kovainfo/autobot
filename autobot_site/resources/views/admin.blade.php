@@ -31,6 +31,12 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <button type="submit">Управление пользователями</button>
             </form>
+            
+             <form action="{{ route('newregcar') }}" method="GET">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <button type="submit">Управление машинами</button>
+            </form>
+            
             <form class=formtable>
                 <div class="text2">
                     <p>ПО ФЕН-ШУЮ АДМИН ДОЛЖЕН<br/>СПАТЬ ГОЛОВОЙ<br/>НА СЕРВЕРЕ</p>

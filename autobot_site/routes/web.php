@@ -44,6 +44,10 @@ Route::get('UserManage', function () {
     return view('UserManage');
 })->name('userManage');
 
+Route::get('NewRegCar', function () {
+    return view('NewRegCar');
+})->name('newregcar');
+
 
 Route::apiResource('reg_cars', RegCarsController::class)->middleware('role');
 
